@@ -1,0 +1,102 @@
+[
+  {
+    "candidateName": "Rahul Sharma",
+    "courseName": "AI Engineering",
+    "certificateNumber": "CERT-2026-0001",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "rahul.sharma@example.com",
+    "phone": "9876500001",
+    "qualification": "B.Tech CSE",
+    "organization": "ABC Institute"
+  },
+  {
+    "candidateName": "Priya Singh",
+    "courseName": "Data Science",
+    "certificateNumber": "CERT-2026-0002",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "priya.singh@example.com",
+    "phone": "9876500002",
+    "qualification": "B.Sc Computer Science",
+    "organization": "XYZ University"
+  },
+  {
+    "candidateName": "Amit Kumar",
+    "courseName": "Web Development",
+    "certificateNumber": "CERT-2026-0003",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "amit.kumar@example.com",
+    "phone": "9876500003",
+    "qualification": "BCA",
+    "organization": "Tech Academy"
+  },
+  {
+    "candidateName": "Neha Verma",
+    "courseName": "Machine Learning",
+    "certificateNumber": "CERT-2026-0004",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "neha.verma@example.com",
+    "phone": "9876500004",
+    "qualification": "M.Tech AI",
+    "organization": "ABC Institute"
+  },
+  {
+    "candidateName": "Arjun Mehta",
+    "courseName": "Cloud Computing",
+    "certificateNumber": "CERT-2026-0005",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "arjun.mehta@example.com",
+    "phone": "9876500005",
+    "qualification": "B.Tech IT",
+    "organization": "Cloud Academy"
+  },
+  {
+    "candidateName": "Sneha Gupta",
+    "courseName": "Python Programming",
+    "certificateNumber": "CERT-2026-0006",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "sneha.gupta@example.com",
+    "phone": "9876500006",
+    "qualification": "BCA",
+    "organization": "Code Institute"
+  },
+  {
+    "candidateName": "Vikram Joshi",
+    "courseName": "Generative AI",
+    "certificateNumber": "CERT-2026-0007",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "vikram.joshi@example.com",
+    "phone": "9876500007",
+    "qualification": "B.Tech CSE",
+    "organization": "AI Academy"
+  },
+  {
+    "candidateName": "Ananya Kapoor",
+    "courseName": "Full Stack Development",
+    "certificateNumber": "CERT-2026-0008",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "ananya.kapoor@example.com",
+    "phone": "9876500008",
+    "qualification": "MCA",
+    "organization": "Web Academy"
+  },
+  {
+    "candidateName": "Karan Malhotra",
+    "courseName": "DevOps Engineering",
+    "certificateNumber": "CERT-2026-0009",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "karan.malhotra@example.com",
+    "phone": "9876500009",
+    "qualification": "B.Tech CSE",
+    "organization": "DevOps Institute"
+  },
+  {
+    "candidateName": "Pooja Nair",
+    "courseName": "Database Management",
+    "certificateNumber": "CERT-2026-0010",
+    "certificateDate": "2026-08-30T18:30:00.000Z",
+    "email": "pooja.nair@example.com",
+    "phone": "9876500010",
+    "qualification": "B.Sc IT",
+    "organization": "Data Academy"
+  }
+]

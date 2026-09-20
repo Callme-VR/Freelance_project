@@ -1,0 +1,44 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch index.ts",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:pull": "prisma db pull",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate"
+  },
+  "devDependencies": {
+    "@types/archiver": "^8.0.0",
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jszip": "^3.4.1",
+    "@types/multer": "^2.2.0",
+    "@types/node": "^26.4.0",
+    "@types/pg": "^8.23.1",
+    "@types/uuid": "^11.0.0",
+    "dotenv": "^17.4.2",
+    "prisma": "7.10.0",
+    "tsx": "^4.23.13"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "7.10.0",
+    "archiver": "^8.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jszip": "^3.10.1",
+    "multer": "^2.3.0",
+    "pdf-lib": "^1.17.1",
+    "pg": "^8.23.0",
+    "uuid": "^14.0.2",
+    "xlsx": "^0.18.5"
+  }
+}

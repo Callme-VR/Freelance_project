@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Batch {
+  id           String   @id @default(cuid())
+  originalName String
+  status       String   @default("uploaded") // uploaded | generating | done | error
+  count        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  certificates Certificate[]
+}
+
+model Certificate {
+  id String @id @default(cuid())
+
+  candidateName     String
+  courseName        String
+  certificateNumber String @unique
+
+  certificateDate DateTime
+
+  // Any additional information from Excel
+  email         String?
+  phone         String?
+  qualification String?
+  organization  String?
+
+  // Generated certificate PDF
+  pdfPath String?
+
+  // Batch relation
+  batchId String?
+  batch   Batch?  @relation(fields: [batchId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([candidateName])
+  @@index([courseName])
+  @@index([batchId])
+  @@index([certificateDate])
+}
