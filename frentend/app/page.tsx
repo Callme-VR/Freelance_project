@@ -2,6 +2,17 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import { listBatches, downloadBatchUrl } from "../lib/api";
 import BatchCard from "./components/BatchCard";
+import {
+  UploadCloud,
+  FileSpreadsheet,
+  CheckCircle2,
+  Award,
+  AlertTriangle,
+  ArrowRight,
+  FolderOpen,
+  Activity,
+  Layers,
+} from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -13,174 +24,341 @@ export default async function DashboardPage() {
     const data = await listBatches();
     batches = data.batches;
   } catch {
-    error = "Could not connect to the API. Make sure the backend is running on port 4500.";
+    error = "Could not establish connection to the certificate processing service.";
   }
 
-  const done = batches.filter((b) => b.status === "done").length;
+  const doneCount = batches.filter((b) => b.status === "done").length;
   const totalCerts = batches.reduce((s, b) => s + b.certificateCount, 0);
 
   return (
     <>
       <Navbar />
 
-      {/* Hero */}
-      <div
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(240,192,64,0.12) 0%, transparent 70%)",
-          padding: "72px 24px 56px",
-          textAlign: "center",
-        }}
-      >
+      <main style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px 80px" }}>
+        {/* Executive Command Header */}
         <div
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "6px 16px",
-            borderRadius: 99,
-            background: "var(--gold-dim)",
-            border: "1px solid rgba(240,192,64,0.25)",
-            fontSize: 13,
-            color: "var(--gold)",
-            fontWeight: 600,
-            marginBottom: 24,
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            paddingBottom: 24,
+            borderBottom: "1px solid var(--border)",
+            marginBottom: 28,
+            flexWrap: "wrap",
+            gap: 16,
           }}
         >
-          🎓 Certificate Management System
+          <div>
+            <div
+              style={{
+                fontSize: 11,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: "var(--gold)",
+                marginBottom: 6,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <Activity size={13} />
+              Operations Dashboard
+            </div>
+            <h1
+              style={{
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: 26,
+                fontWeight: 800,
+                color: "var(--text-primary)",
+                letterSpacing: "-0.02em",
+                margin: 0,
+                lineHeight: 1.2,
+              }}
+            >
+              Certificate Generation
+            </h1>
+            <p style={{ color: "var(--text-secondary)", fontSize: 13, marginTop: 6, margin: 0 }}>
+              Batch issuance pipeline, candidate rosters, and generated credential packages.
+            </p>
+          </div>
+
+          {/* Quick Actions */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Link
+              href="/batches"
+              className="btn btn-ghost"
+              style={{ fontSize: 13, padding: "7px 14px", minHeight: 36 }}
+            >
+              <Layers size={14} />
+              All Batches
+            </Link>
+            <Link
+              href="/upload"
+              className="btn btn-primary"
+              style={{ fontSize: 13, padding: "7px 16px", minHeight: 36 }}
+            >
+              <UploadCloud size={15} strokeWidth={2.5} />
+              Import Roster
+            </Link>
+          </div>
         </div>
 
-        <h1
-          style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "clamp(36px, 6vw, 64px)",
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.1,
-            marginBottom: 20,
-            color: "var(--text-primary)",
-          }}
-        >
-          Generate certificates
-          <br />
-          <span className="gradient-text">in seconds, not hours.</span>
-        </h1>
-
-        <p
-          style={{
-            color: "var(--text-secondary)",
-            fontSize: 18,
-            maxWidth: 540,
-            margin: "0 auto 36px",
-            lineHeight: 1.6,
-          }}
-        >
-          Upload your Excel roster, preview candidates, and generate
-          professional PDF certificates in bulk — then download them all as a ZIP.
-        </p>
-
-        <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/upload" className="btn btn-primary" style={{ fontSize: 15, padding: "12px 28px" }}>
-            🚀 Upload Excel File
-          </Link>
-          <Link href="/batches" className="btn btn-ghost" style={{ fontSize: 15, padding: "12px 28px" }}>
-            View History
-          </Link>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div
+        {/* Architectural Metrics Strip */}
+        <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 16,
-            marginBottom: 48,
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 1,
+            background: "var(--border)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            overflow: "hidden",
+            marginBottom: 36,
           }}
         >
-          {[
-            { label: "Total Batches", value: batches.length, icon: "📋" },
-            { label: "Completed Batches", value: done, icon: "✅" },
-            { label: "Certificates Generated", value: totalCerts, icon: "🏆" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="card"
-              style={{ padding: "20px 24px", display: "flex", gap: 14, alignItems: "center" }}
-            >
+          {/* Metric 1 */}
+          <div style={{ background: "var(--bg-surface)", padding: "18px 22px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                Total Batches
+              </span>
+              <FileSpreadsheet size={16} style={{ color: "var(--text-muted)" }} />
+            </div>
+            <div className="tabular-nums" style={{ fontSize: 28, fontWeight: 700, color: "var(--text-primary)", lineHeight: 1 }}>
+              {batches.length}
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 6 }}>
+              Ingested spreadsheet files
+            </div>
+          </div>
+
+          {/* Metric 2 */}
+          <div style={{ background: "var(--bg-surface)", padding: "18px 22px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                Completed Runs
+              </span>
+              <CheckCircle2 size={16} style={{ color: "var(--success)" }} />
+            </div>
+            <div className="tabular-nums" style={{ fontSize: 28, fontWeight: 700, color: "var(--text-primary)", lineHeight: 1 }}>
+              {doneCount}
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 6 }}>
+              {batches.length > 0
+                ? `${Math.round((doneCount / batches.length) * 100)}% completion rate`
+                : "Awaiting first run"}
+            </div>
+          </div>
+
+          {/* Metric 3 */}
+          <div style={{ background: "var(--bg-surface)", padding: "18px 22px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                Credentials Issued
+              </span>
+              <Award size={16} style={{ color: "var(--gold)" }} />
+            </div>
+            <div className="tabular-nums" style={{ fontSize: 28, fontWeight: 700, color: "var(--gold)", lineHeight: 1 }}>
+              {totalCerts}
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 6 }}>
+              Verified candidate records
+            </div>
+          </div>
+
+          {/* Metric 4 */}
+          <div style={{ background: "var(--bg-surface)", padding: "18px 22px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                Engine Status
+              </span>
               <div
                 style={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 10,
-                  background: "var(--gold-dim)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 22,
-                  flexShrink: 0,
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: error ? "var(--danger)" : "var(--success)",
+                  boxShadow: error ? "none" : "0 0 8px rgba(16, 185, 129, 0.4)",
                 }}
-              >
-                {stat.icon}
-              </div>
-              <div>
-                <div style={{ fontSize: 26, fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
-                  {stat.value}
-                </div>
-                <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>
-                  {stat.label}
-                </div>
-              </div>
+              />
             </div>
-          ))}
-        </div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: error ? "var(--danger)" : "var(--text-primary)", lineHeight: 1.2 }}>
+              {error ? "Offline" : "Ready"}
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>
+              {error ? "Service unreachable" : "PDF generation service active"}
+            </div>
+          </div>
+        </section>
 
-        {/* Recent batches */}
-        <div style={{ marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--text-primary)" }}>
-            Recent Batches
-          </h2>
-          {batches.length > 5 && (
-            <Link href="/batches" style={{ fontSize: 13, color: "var(--gold)", textDecoration: "none" }}>
-              View all →
-            </Link>
-          )}
-        </div>
-
+        {/* Error Alert */}
         {error && (
           <div
             className="card"
             style={{
-              padding: 20,
-              borderColor: "rgba(248,113,113,0.3)",
-              color: "var(--danger)",
-              fontSize: 14,
-              marginBottom: 32,
+              padding: "14px 18px",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              borderColor: "rgba(239, 68, 68, 0.3)",
+              background: "rgba(239, 68, 68, 0.08)",
+              color: "#fca5a5",
+              fontSize: 13,
+              marginBottom: 28,
             }}
           >
-            ⚠️ {error}
+            <AlertTriangle size={16} style={{ color: "var(--danger)", flexShrink: 0 }} />
+            <span>{error}</span>
           </div>
         )}
 
-        {!error && batches.length === 0 && (
-          <div className="card" style={{ padding: "48px 24px", textAlign: "center" }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>📭</div>
-            <p style={{ color: "var(--text-secondary)", fontSize: 16, marginBottom: 20 }}>
-              No batches yet. Upload your first Excel file to get started.
-            </p>
-            <Link href="/upload" className="btn btn-primary">
-              Upload Now
+        {/* Main Content Layout: Asymmetric Work Area */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 28 }}>
+          {/* Recent Batches Section */}
+          <section>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 14,
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <h2 style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", margin: 0 }}>
+                  Recent Batches
+                </h2>
+                <span
+                  className="tabular-nums"
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 600,
+                    padding: "1px 7px",
+                    borderRadius: 99,
+                    background: "rgba(255, 255, 255, 0.06)",
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  {batches.length}
+                </span>
+              </div>
+              {batches.length > 5 && (
+                <Link
+                  href="/batches"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                    fontSize: 12,
+                    fontWeight: 500,
+                    color: "var(--gold)",
+                    textDecoration: "none",
+                  }}
+                >
+                  View full history <ArrowRight size={13} />
+                </Link>
+              )}
+            </div>
+
+            {/* Empty State */}
+            {!error && batches.length === 0 && (
+              <div
+                className="card"
+                style={{
+                  padding: "56px 24px",
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 12,
+                }}
+              >
+                <div
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: "var(--radius-sm)",
+                    background: "rgba(255, 255, 255, 0.03)",
+                    border: "1px solid var(--border)",
+                    color: "var(--text-muted)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FolderOpen size={20} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>
+                    No Batches Created Yet
+                  </h3>
+                  <p style={{ color: "var(--text-secondary)", fontSize: 13, maxWidth: 380, margin: "0 auto" }}>
+                    Import an Excel file containing candidate names, courses, and dates to generate your first batch.
+                  </p>
+                </div>
+                <Link href="/upload" className="btn btn-primary" style={{ marginTop: 8 }}>
+                  <UploadCloud size={14} />
+                  Import First Roster
+                </Link>
+              </div>
+            )}
+
+            {/* Batch List */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {batches.slice(0, 8).map((b) => (
+                <BatchCard key={b.id} batch={b} downloadUrl={downloadBatchUrl(b.id)} />
+              ))}
+            </div>
+          </section>
+
+          {/* Quick Roster Import Callout */}
+          <section
+            className="card"
+            style={{
+              padding: "24px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "var(--bg-subtle)",
+              borderColor: "var(--border)",
+              flexWrap: "wrap",
+              gap: 16,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: "var(--radius-sm)",
+                  background: "rgba(245, 158, 11, 0.1)",
+                  border: "1px solid rgba(245, 158, 11, 0.2)",
+                  color: "var(--gold)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <UploadCloud size={18} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>
+                  Need to issue a new set of certificates?
+                </h3>
+                <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, maxWidth: 540 }}>
+                  Upload any <code style={{ color: "var(--text-primary)", background: "rgba(255,255,255,0.06)", padding: "1px 5px", borderRadius: 3 }}>.xlsx</code> or <code style={{ color: "var(--text-primary)", background: "rgba(255,255,255,0.06)", padding: "1px 5px", borderRadius: 3 }}>.xls</code> roster with Name, Course, and Date columns.
+                </p>
+              </div>
+            </div>
+            <Link href="/upload" className="btn btn-primary" style={{ padding: "8px 18px" }}>
+              Start Batch Import
+              <ArrowRight size={14} />
             </Link>
-          </div>
-        )}
-
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 60 }}>
-          {batches.slice(0, 5).map((b) => (
-            <BatchCard key={b.id} batch={b} downloadUrl={downloadBatchUrl(b.id)} />
-          ))}
+          </section>
         </div>
-      </div>
+      </main>
     </>
   );
 }

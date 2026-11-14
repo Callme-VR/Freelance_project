@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import { UploadCloud, FileSpreadsheet, Loader2 } from "lucide-react";
 
 interface Props {
   onFile: (file: File) => void;
@@ -24,13 +25,13 @@ export default function UploadZone({ onFile, loading }: Props) {
       onDragLeave={() => setDrag(false)}
       onDrop={handleDrop}
       style={{
-        border: `2px dashed ${drag ? "var(--gold)" : "var(--border-hover)"}`,
+        border: `2px dashed ${drag ? "var(--gold)" : "var(--border)"}`,
         borderRadius: "var(--radius-lg)",
-        padding: "60px 40px",
+        padding: "56px 32px",
         textAlign: "center",
         cursor: loading ? "not-allowed" : "pointer",
         background: drag ? "var(--gold-dim)" : "var(--bg-card)",
-        transition: "all 0.2s",
+        transition: "all 0.2s ease",
         userSelect: "none",
       }}
     >
@@ -47,33 +48,58 @@ export default function UploadZone({ onFile, loading }: Props) {
 
       {loading ? (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-          <div className="spinner" style={{ width: 36, height: 36, borderWidth: 3 }} />
-          <p style={{ color: "var(--text-secondary)", fontSize: 15 }}>Parsing your Excel file…</p>
+          <Loader2 size={36} className="spin" style={{ color: "var(--gold)" }} />
+          <p style={{ color: "var(--text-secondary)", fontSize: 15, fontWeight: 500 }}>
+            Parsing roster workbook…
+          </p>
         </div>
       ) : (
         <>
-          <div style={{ fontSize: 52, marginBottom: 16 }}>📊</div>
+          <div
+            style={{
+              width: 64,
+              height: 64,
+              margin: "0 auto 20px",
+              borderRadius: 16,
+              background: "rgba(245, 158, 11, 0.12)",
+              color: "var(--gold)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <UploadCloud size={32} />
+          </div>
           <p
             style={{
               color: "var(--text-primary)",
               fontWeight: 600,
               fontSize: 18,
-              marginBottom: 8,
+              marginBottom: 6,
             }}
           >
-            Drop your Excel file here
+            Drop your candidate roster here
           </p>
           <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 20 }}>
-            Supports .xlsx and .xls — up to 20 MB
+            Accepted formats: .xlsx or .xls (up to 20 MB)
           </p>
           <span className="btn btn-ghost" style={{ pointerEvents: "none" }}>
+            <FileSpreadsheet size={16} />
             Browse Files
           </span>
-          <p style={{ marginTop: 20, color: "var(--text-muted)", fontSize: 12 }}>
-            Required columns: <strong style={{ color: "var(--text-secondary)" }}>Name</strong>,{" "}
+          <div
+            style={{
+              marginTop: 24,
+              paddingTop: 16,
+              borderTop: "1px solid var(--border)",
+              color: "var(--text-muted)",
+              fontSize: 13,
+            }}
+          >
+            Expected columns: <strong style={{ color: "var(--text-secondary)" }}>Name</strong>,{" "}
             <strong style={{ color: "var(--text-secondary)" }}>Course</strong>,{" "}
             <strong style={{ color: "var(--text-secondary)" }}>Date</strong>
-          </p>
+          </div>
         </>
       )}
     </div>

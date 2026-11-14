@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --bg-base: #080c18;
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.18);
+  --bg-base: #080c16;
+  --bg-surface: #0e1424;
+  --bg-surface-hover: #141c30;
+  --bg-subtle: #101728;
+  --border: #1e293b;
+  --border-hover: #334155;
 
-  --gold: #f0c040;
-  --gold-dim: rgba(240, 192, 64, 0.15);
-  --gold-glow: rgba(240, 192, 64, 0.35);
-  --accent: #6c8ef5;
-  --accent-dim: rgba(108, 142, 245, 0.15);
-  --success: #34d399;
-  --warning: #fbbf24;
-  --danger: #f87171;
+  --gold: #f59e0b;
+  --gold-hover: #d97706;
+  --gold-dim: rgba(245, 158, 11, 0.12);
+  --accent: #3b82f6;
+  --accent-dim: rgba(59, 130, 246, 0.12);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
 
-  --text-primary: #f0f4ff;
-  --text-secondary: #8b98b8;
-  --text-muted: #4a5270;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
 
-  --radius: 14px;
-  --radius-sm: 8px;
-  --radius-lg: 20px;
+  --radius: 6px;
+  --radius-sm: 4px;
+  --radius-lg: 8px;
 }
 
 * {
@@ -61,70 +62,74 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ── Glass Card ──────────────────────────────────────────────────────────────── */
+/* ── Architectural Surface / Card ───────────────────────────────────────────── */
 .card {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  backdrop-filter: blur(20px);
-  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  transition: border-color 0.12s ease-out, background-color 0.12s ease-out;
 }
 
 .card:hover {
   border-color: var(--border-hover);
-  background: var(--bg-card-hover);
+  background: var(--bg-surface-hover);
 }
 
-.card-glow {
-  box-shadow: 0 0 0 1px var(--gold-glow), 0 8px 40px rgba(240, 192, 64, 0.1);
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Buttons ─────────────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
+  min-height: 38px;
+  padding: 6px 16px;
   border-radius: var(--radius-sm);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
-  border: none;
+  transition: background-color 0.12s ease-out, border-color 0.12s ease-out, color 0.12s ease-out;
+  border: 1px solid transparent;
   text-decoration: none;
   white-space: nowrap;
 }
 
+.btn:focus-visible, a:focus-visible, input:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 .btn-primary {
-  background: linear-gradient(135deg, #f0c040, #e8a020);
-  color: #1a1200;
-  box-shadow: 0 4px 20px rgba(240, 192, 64, 0.35);
+  background: var(--gold);
+  color: #080c16;
+  font-weight: 600;
+  border-color: var(--gold-hover);
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 28px rgba(240, 192, 64, 0.5);
+  background: var(--gold-hover);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  background: #b45309;
 }
 
 .btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 
 .btn-ghost {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   color: var(--text-secondary);
   border: 1px solid var(--border);
 }
 
 .btn-ghost:hover {
-  background: var(--bg-card-hover);
+  background: var(--bg-surface-hover);
   border-color: var(--border-hover);
   color: var(--text-primary);
 }
